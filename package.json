@@ -13,9 +13,7 @@
     "dev:server": "DEBUG=first-vue:* nodemon -L ./server/index.js",
     "dev": "npm run dev:server",
     "eslint:server": "eslint ./server/**",
-    "start": "pm2-runtime start ecosystem.config.js --env production",
-    "stats": "webpack --profile --json > dist/stats.json",
-    "analyze": "webpack-bundle-analyzer dist/stats.json --port 8765"
+    "start": "pm2-runtime start ecosystem.config.js --env production"
   },
   "browserslist": [
     "last 1 versions",

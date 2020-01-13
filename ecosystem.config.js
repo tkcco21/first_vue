@@ -3,7 +3,7 @@
 module.exports = {
   apps : [{
     name: 'first-vue',
-    script: './src/server/',
+    script: './server/',
     autorestart: true,
     watch: false,
     env: {
