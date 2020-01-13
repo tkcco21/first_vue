@@ -23,9 +23,7 @@
       {
         "alias": {
           "@Config": "./config",
-          "@Server": "./src/server",
-          "@Admin": "./src/client/js/admin",
-          "@Public": "./src/client/js/public"
+          "@Server": "./server",
         }
       }
     ]

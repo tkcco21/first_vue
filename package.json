@@ -11,10 +11,10 @@
     "migrate:dev": "sequelize db:migrate",
     "migrate:prd": "NODE_ENV=production sequelize db:migrate",
     "rm:dist": "rimraf ./dist/js ./dist/css",
-    "dev:server": "DEBUG=first-vue:* nodemon -L ./src/server/index.js",
+    "dev:server": "DEBUG=first-vue:* nodemon -L ./server/index.js",
     "dev": "npm run rm:dist && npm run dev:server",
     "build": "npm run rm:dist && NODE_ENV=production webpack",
-    "eslint:server": "eslint ./src/server/**",
+    "eslint:server": "eslint ./server/**",
     "start": "pm2-runtime start ecosystem.config.js --env production",
     "stats": "webpack --profile --json > dist/stats.json",
     "analyze": "webpack-bundle-analyzer dist/stats.json --port 8765"
