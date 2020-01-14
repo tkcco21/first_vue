@@ -5,4 +5,5 @@ module.exports = {
   token: {
     key: process.env.TOKEN_KEY,
   },
+  clientUrl: process.env.CLIENT_URL
 };
