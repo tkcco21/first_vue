@@ -5,7 +5,7 @@ import adminUsers from '@Server/db/entity/adminUsers';
 
 export default {
   checkToken(req, res) {
-    const token = req.cookies[config.token.key]
+    const token = req.cookies[config.token.key];
     const decoded = decode(token);
 
     if (!decoded) return res.status(401).send({ message: 'ログインしてください。' });
