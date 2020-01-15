@@ -39,8 +39,16 @@ export default {
 
       if (!token) throw new Error('トークンが発行できません。');
 
+      const domain = process.env.NODE_ENV === 'production'
+        ? 'first-vue.tkcco21.me'
+        : 'localhost:8000';
       res
-        .cookie(config.token.key, token, { maxAge: 2 * 24 * 60 * 60 * 1000 })
+        .cookie(config.token.key, token, {
+          maxAge: 2 * 24 * 60 * 60 * 1000,
+          domain,
+          path: '/admin',
+          secure: process.env.NODE_ENV === 'production'
+        })
         .send({ token });
     }).catch(({ message }) => res.status(400).send({ message }));
   },

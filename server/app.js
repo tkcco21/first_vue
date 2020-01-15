@@ -5,7 +5,6 @@ import helmet from 'helmet';
 import logger from 'morgan';
 import createError from 'http-errors';
 
-import config from '@Config';
 import apiRouter from './routes/api';
 
 const debug = require('debug')('first-vue:server');
@@ -14,7 +13,6 @@ const debug = require('debug')('first-vue:server');
 // const isDev = nodeEnv === 'development';
 
 const app = express();
-const allowedOrigins = config.clientUrl.split(' ');
 
 // =========================================================
 // For Hot Module Replacement
@@ -29,7 +27,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // CORSを許可する
 app.use((req, res, next) => {
-  let origin = req.headers.origin;
+  const origin = req.headers.origin;
+  let allowedOrigins;
+  if (process.env.NODE_ENV === 'development') {
+    allowedOrigins = ['http://localhost:8000', 'http://localhost:8000/']
+  } else {
+    allowedOrigins = ['https://first-vue.tkcco21.me', 'https://first-vue.tkcco21.me/']
+  }
   if (allowedOrigins.includes(origin)) {
     res.header('Access-Control-Allow-Origin', origin);
   }
