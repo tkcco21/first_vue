@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
@@ -26,7 +25,22 @@ app.use(helmet());
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+// CORSを許可する
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  let allowedOrigins;
+  if (process.env.NODE_ENV === 'development') {
+    allowedOrigins = ['http://localhost:8000', 'http://localhost:8000/']
+  } else {
+    allowedOrigins = ['https://first-vue.tkcco21.me', 'https://first-vue.tkcco21.me/']
+  }
+  if (allowedOrigins.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+  }
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, PATCH, OPTIONS');
+  next();
+});
 
 app.use('/api', apiRouter);
 
