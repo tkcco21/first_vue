@@ -4,6 +4,8 @@ import { sign, decode } from '@Server/utils/jsonwebtoken';
 import adminUsers from '@Server/db/entity/adminUsers';
 
 export default {
+  // NOTE: クロスドメインだとcookieの登録ができなかったので、このcheckTokenは使わなくした。
+  // TODO: ↓要修正。ただクライアントのJSではcookieは触りたくない。
   checkToken(req, res) {
     const token = req.cookies[config.token.key];
     const decoded = decode(token);
@@ -39,16 +41,10 @@ export default {
 
       if (!token) throw new Error('トークンが発行できません。');
 
-      const domain = process.env.NODE_ENV === 'production'
-        ? 'first-vue.tkcco21.me'
-        : 'localhost:8000';
       res
-        .cookie(config.token.key, token, {
-          maxAge: 2 * 24 * 60 * 60 * 1000,
-          domain,
-          path: '/admin',
-          secure: process.env.NODE_ENV === 'production'
-        })
+        // NOTE: クロスドメインだとcookieの登録ができなかったので、set-cookieは一旦しない。
+        // TODO: cookie使えるようにしたい。ただクライアントのJSではcookieは触りたくない。
+        // .cookie(config.token.key, token, { maxAge: 2 * 24 * 60 * 60 * 1000 })
         .send({ token });
     }).catch(({ message }) => res.status(400).send({ message }));
   },
