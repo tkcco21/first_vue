@@ -7,9 +7,6 @@
     "node": "10.15.0",
     "npm": "6.9.0"
   },
-  "renovate": {
-    "baseBranches": ["develop"]
-  },
   "scripts": {
     "migrate:dev": "sequelize db:migrate",
     "migrate:prd": "NODE_ENV=production sequelize db:migrate",
