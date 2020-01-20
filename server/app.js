@@ -9,15 +9,10 @@ import apiRouter from './routes/api';
 
 const debug = require('debug')('first-vue:server');
 
-// const nodeEnv = process.env.NODE_ENV;
-// const isDev = nodeEnv === 'development';
+const nodeEnv = process.env.NODE_ENV;
+const isDev = nodeEnv === 'development';
 
 const app = express();
-
-// =========================================================
-// For Hot Module Replacement
-// if (isDev) require('./webpackForHmr').default(app);
-// =========================================================
 
 app.use(compression());
 app.use(logger('dev'));
@@ -27,16 +22,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // CORSを許可する
 app.use((req, res, next) => {
-  const origin = req.headers.origin;
   let allowedOrigins;
-  if (process.env.NODE_ENV === 'development') {
-    allowedOrigins = ['http://localhost:8000', 'http://localhost:8000/']
+  if (isDev) {
+    allowedOrigins = 'http://localhost:8000'
   } else {
-    allowedOrigins = ['https://first-vue.tkcco21.me', 'https://first-vue.tkcco21.me/']
+    allowedOrigins = 'https://first-vue.tkcco21.me'
   }
-  if (allowedOrigins.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
-  }
+  res.header('Access-Control-Allow-Origin', allowedOrigins);
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
   res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, PATCH, OPTIONS');
   next();

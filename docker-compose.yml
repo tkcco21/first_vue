@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: dev_first_vue
+      MYSQL_USER: devuser
+      MYSQL_ROOT_PASSWORD: devdev.21FirstTkc@
+      MYSQL_PASSWORD: devdev.21FirstTkc@
+      TZ: 'Asia/Tokyo'
+    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3306:3306"
+
+  node-app:
+    restart: always
+    build: .
+    ports:
+      - "3000:3000" # {local port}:{container port}
+    links:
+      - db
