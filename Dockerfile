@@ -7,8 +7,8 @@ WORKDIR /root/app
 ## COPY {path of my machine} {path of the container}
 COPY ./app/package* ./
 RUN npm install
-COPY ./app .
 
+COPY ./app .
 
 # 3. Tell the image what to do when it starts as a container
 CMD ["npm", "run" ,"dev"]

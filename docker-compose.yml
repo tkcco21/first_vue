@@ -2,22 +2,30 @@ version: '3'
 
 services:
 
-  db:
-    image: mysql:5.7
-    environment:
-      MYSQL_DATABASE: dev_first_vue
-      MYSQL_USER: devuser
-      MYSQL_ROOT_PASSWORD: devdev.21FirstTkc@
-      MYSQL_PASSWORD: devdev.21FirstTkc@
-      TZ: 'Asia/Tokyo'
-    command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
-    ports:
-      - "3306:3306"
-
   node-app:
     restart: always
     build: .
     ports:
       - "3000:3000" # {local port}:{container port}
+    volumes:
+      - /root/app/node_modules
+      - ./app:/root/app
     links:
       - db
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_DATABASE: dev_first_vue
+      MYSQL_ROOT_PASSWORD: devdev.21FirstTkc@
+      # もしかしたらrootのみいればいいのかも
+      # MYSQL_USER: devuser
+      # MYSQL_PASSWORD: devdev.21FirstTkc@
+      TZ: 'Asia/Tokyo'
+    ports:
+      - "3306:3306"
+    # volumes:
+    #   # 実データ
+    #   - ./data/mysql:/var/lib/mysql
+    #   # mysqlの設定ファイル
+    #   - ./data/my.cnf:/etc/mysql/conf.d/my.cnf
