@@ -10,20 +10,24 @@ services:
     volumes:
       - /root/app/node_modules
       - ./app:/root/app
-    links:
-      - db
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASS: devdev.21FirstTkc@
+      DB_PORT: 3306
+    command: npm run migrate:dev
 
   db:
     image: mysql:5.7
     environment:
-      MYSQL_DATABASE: dev_first_vue
       MYSQL_ROOT_PASSWORD: devdev.21FirstTkc@
-      # もしかしたらrootのみいればいいのかも
-      # MYSQL_USER: devuser
-      # MYSQL_PASSWORD: devdev.21FirstTkc@
+      MYSQL_DATABASE: dev_first_vue
+      MYSQL_PASSWORD: devdev.21FirstTkc@
       TZ: 'Asia/Tokyo'
     ports:
       - "3306:3306"
+    expose:
+      - "3306"
     # volumes:
     #   # 実データ
     #   - ./data/mysql:/var/lib/mysql
