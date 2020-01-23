@@ -15,7 +15,6 @@ services:
       DB_USER: root
       DB_PASS: devdev.21FirstTkc@
       DB_PORT: 3306
-    command: npm run migrate:dev
 
   db:
     image: mysql:5.7
@@ -28,8 +27,5 @@ services:
       - "3306:3306"
     expose:
       - "3306"
-    # volumes:
-    #   # 実データ
-    #   - ./data/mysql:/var/lib/mysql
-    #   # mysqlの設定ファイル
-    #   - ./data/my.cnf:/etc/mysql/conf.d/my.cnf
+    volumes:
+      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf

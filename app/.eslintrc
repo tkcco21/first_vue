@@ -1,25 +1,25 @@
 {
-  "parser": "vue-eslint-parser",
   "parserOptions": {
     "parser": "babel-eslint"
   },
   "env": {
-    "browser": true,
+    "es6": true,
     "node": true
   },
+  "plugins": ["prettier"],
   "extends": [
     "eslint:recommended",
-    "airbnb-base",
-    "plugin:vue/recommended"
+    "prettier",
+    "airbnb-base"
   ],
   "settings": {
     "import/resolver": {
       "alias": {
         "map": [
           ["@Config", "./config"],
-          ["@Server", "./server"],
+          ["@Server", "./server"]
         ],
-        "extensions": [".vue", ".js", ".json", ".css"]
+        "extensions": [".js", ".json"]
       }
     }
   },
@@ -52,16 +52,6 @@
       {
         "props": true,
         "ignorePropertyModificationsFor": ["state"]
-      }
-    ],
-    "vue/singleline-html-element-content-newline": "off",
-    "vue/max-attributes-per-line": [
-      "error",
-      {
-        "singleline": 3,
-        "multiline": {
-          "max": 1
-        }
       }
     ]
   }

@@ -12,8 +12,9 @@
     "migrate:prd": "NODE_ENV=production sequelize db:migrate",
     "dev:server": "DEBUG=first-vue:* nodemon -L ./server/index.js",
     "dev": "npm run dev:server",
-    "eslint:server": "eslint ./server/**",
-    "start": "pm2-runtime start ecosystem.config.js --env production"
+    "start": "pm2-runtime start ecosystem.config.js --env production",
+    "eslint": "eslint ./server/**",
+    "seed": "sequelize db:seed:all"
   },
   "dependencies": {
     "@babel/register": "^7.4.0",
@@ -22,6 +23,8 @@
     "cookie-parser": "^1.4.4",
     "core-js": "^3.0.1",
     "dotenv": "^8.0.0",
+    "eslint-config-prettier": "^6.9.0",
+    "eslint-plugin-prettier": "^3.1.2",
     "express": "^4.16.4",
     "helmet": "^3.21.2",
     "jsonwebtoken": "^8.5.1",
@@ -29,6 +32,7 @@
     "morgan": "^1.9.1",
     "mysql2": "^2.0.0",
     "pm2": "^4.0.0",
+    "prettier": "^1.19.1",
     "sequelize": "^5.19.0",
     "sequelize-cli": "^5.5.0"
   },
