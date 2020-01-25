@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+
+  node-app:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000" # {local port}:{container port}
+    volumes:
+      - /root/app/node_modules
+      - ./app:/root/app
+    environment:
+      DB_HOST: db
+      DB_USER: root
+      DB_PASS: devdev.21FirstTkc@
+      DB_PORT: 3306
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: devdev.21FirstTkc@
+      MYSQL_DATABASE: dev_first_vue
+      MYSQL_PASSWORD: devdev.21FirstTkc@
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    command: --sql-mode=NO_ENGINE_SUBSTITUTION --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
