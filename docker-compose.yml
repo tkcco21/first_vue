@@ -4,7 +4,9 @@ services:
 
   node-app:
     restart: always
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     ports:
       - "3000:3000" # {local port}:{container port}
     volumes:
@@ -22,10 +24,8 @@ services:
       MYSQL_ROOT_PASSWORD: devdev.21FirstTkc@
       MYSQL_DATABASE: dev_first_vue
       MYSQL_PASSWORD: devdev.21FirstTkc@
-      TZ: 'Asia/Tokyo'
     ports:
       - "3306:3306"
     expose:
       - "3306"
-    volumes:
-      - ./docker/db/my.cnf:/etc/mysql/conf.d/my.cnf
+    command: --sql-mode=NO_ENGINE_SUBSTITUTION --character-set-server=utf8mb4 --collation-server=utf8mb4_general_ci
