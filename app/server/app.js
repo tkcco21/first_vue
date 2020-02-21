@@ -24,9 +24,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use((req, res, next) => {
   let allowedOrigins;
   if (isDev) {
-    allowedOrigins = 'http://localhost:8000'
+    allowedOrigins = 'http://localhost:8000';
   } else {
-    allowedOrigins = 'https://first-vue.tkcco21.me'
+    allowedOrigins = 'https://first-vue.tkcco21.me';
   }
   res.header('Access-Control-Allow-Origin', allowedOrigins);
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
@@ -35,6 +35,11 @@ app.use((req, res, next) => {
 });
 
 app.use('/api', apiRouter);
+
+// NOTE: /api以外のパスにきたらリダイレクト
+app.get('/*', (req, res) => {
+  res.redirect('https://first-vue.tkcco21.me/');
+});
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
