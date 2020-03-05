@@ -10,9 +10,10 @@
   "scripts": {
     "migrate:dev": "sequelize db:migrate",
     "migrate:prd": "NODE_ENV=production sequelize db:migrate",
-    "dev:server": "DEBUG=first-vue:* nodemon -L ./server/index.js",
+    "dev:server": "ts-node ./server/index.js",
     "dev": "npm run dev:server",
     "start": "pm2-runtime start ecosystem.config.js --env production",
+    "build": "NODE_ENV=production  webpack",
     "eslint": "eslint ./server/**",
     "seed": "sequelize db:seed:all"
   },
@@ -45,6 +46,8 @@
     "eslint-config-airbnb-base": "14.0.0",
     "eslint-import-resolver-alias": "1.1.2",
     "eslint-plugin-import": "2.20.1",
-    "nodemon": "2.0.2"
+    "nodemon": "2.0.2",
+    "ts-node": "^8.6.2",
+    "typescript": "^3.8.3"
   }
 }
