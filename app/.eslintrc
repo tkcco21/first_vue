@@ -1,16 +1,17 @@
 {
   "parserOptions": {
-    "parser": "babel-eslint"
+    "parser": "@typescript-eslint/parser",
+    "project": "./tsconfig.json"
   },
   "env": {
     "es6": true,
     "node": true
   },
-  "plugins": ["prettier"],
+  "plugins": ["prettier", "@typescript-eslint"],
   "extends": [
     "eslint:recommended",
-    "prettier",
-    "airbnb-base"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
   ],
   "settings": {
     "import/resolver": {
@@ -19,7 +20,7 @@
           ["@Config", "./config"],
           ["@Server", "./server"]
         ],
-        "extensions": [".js", ".json"]
+        "extensions": [".ts", ".js", ".json"]
       }
     }
   },
@@ -27,32 +28,21 @@
     "no-new": "off",
     "no-console": "warn",
     "no-control-regex": "off",
-    "max-len": [
-      "error",
-      {
-        "code": 90,
-        "ignoreComments": true,
-        "ignoreTrailingComments": true,
-        "ignoreStrings": true,
-        "ignoreTemplateLiterals": true,
-        "ignoreUrls": true
-      }
-    ],
-    "no-irregular-whitespace": [
-      "error",
-      {
-        "skipTemplates": true,
-        "skipStrings": true
-      }
-    ],
-    "import/no-named-as-default": "off",
     "import/no-extraneous-dependencies": "off",
-    "no-param-reassign": [
-      "error",
-      {
-        "props": true,
-        "ignorePropertyModificationsFor": ["state"]
-      }
-    ]
+    "import/prefer-default-export": "off",
+    "max-len": ["error", {
+      "code": 100,
+      "ignoreComments": true,
+      "ignoreTrailingComments": true,
+      "ignoreStrings": true,
+      "ignoreTemplateLiterals": true,
+      "ignoreUrls": true
+    }],
+    "prettier/prettier": ["error", {
+      "singleQuote": true,
+      "semi": false,
+      "trailingComma": "all",
+      "printWidth": 90
+    }]
   }
 }
