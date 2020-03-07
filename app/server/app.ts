@@ -1,4 +1,4 @@
-import express, { Request, Response, NextFunction } from 'express'
+import express from 'express'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import helmet from 'helmet'
@@ -40,14 +40,5 @@ app.use('/api', apiRouter)
 app.get('/', (req, res) => {
   res.status(301).redirect(origin)
 })
-
-// error handler // TODO: 要確認。凝ったエラーハンドリングが必要なければいらなそう。
-// app.use((err: any, req: Request, res: Response, next: NextFunction) => {
-//   if (req.app.get('env') === 'development') {
-//     console.error(err)
-//   }
-
-//   res.status(err.status || 500)
-// })
 
 export { app }
