@@ -10,7 +10,7 @@
   "scripts": {
     "migrate:dev": "sequelize db:migrate",
     "migrate:prd": "NODE_ENV=production sequelize db:migrate",
-    "dev": "NODE_ENV=development ts-node -r tsconfig-paths/register ./server/index.ts",
+    "dev": "nodemon",
     "start": "pm2-runtime start ecosystem.config.js --env production",
     "seed": "sequelize db:seed:all"
   },
