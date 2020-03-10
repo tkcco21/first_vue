@@ -1,6 +1,6 @@
 import crypto from 'crypto'
 
-export default str => {
+export const encrypt = (str: string): string => {
   const sha256 = crypto.createHash('sha256')
 
   sha256.update(str)

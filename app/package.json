@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@babel/register": "^7.4.0",
+    "@types/jsonwebtoken": "^8.3.8",
     "compression": "^1.7.4",
     "config": "^3.1.0",
     "cookie-parser": "^1.4.4",

@@ -1,5 +1,5 @@
 import { config } from '@Config'
-import encrypt from '@Server/helpers/hash'
+import { encrypt } from '@Server/helpers/hash'
 import { sign, decode } from '@Server/helpers/jsonwebtoken'
 import adminUsers from '@Server/repositories/adminUsers'
 
@@ -38,8 +38,6 @@ export default {
       .findOne(username)
       .then(({ user }) => {
         const reqEncryptedPassword = encrypt(password)
-        console.log(user)
-        console.log(reqEncryptedPassword)
 
         if (!user || user.password !== reqEncryptedPassword) {
           throw new Error('違います！！')

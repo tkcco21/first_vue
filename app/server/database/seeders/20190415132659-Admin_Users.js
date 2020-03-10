@@ -1,5 +1,5 @@
 import moment from 'moment'
-import encrypt from '@Server/helpers/hash'
+import { encrypt } from '@Server/helpers/hash'
 
 module.exports = {
   up: (queryInterface, Sequelize) =>
