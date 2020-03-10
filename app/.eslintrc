@@ -30,6 +30,7 @@
     "no-control-regex": "off",
     "import/no-extraneous-dependencies": "off",
     "import/prefer-default-export": "off",
+    "@typescript-eslint/member-delimiter-style": "off",
     "max-len": ["error", {
       "code": 100,
       "ignoreComments": true,

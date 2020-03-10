@@ -1,27 +1,31 @@
-import config from '@Config';
-import encrypt from '@Server/utils/hash';
-import { sign, decode } from '@Server/utils/jsonwebtoken';
-import adminUsers from '@Server/db/entity/adminUsers';
+import { config } from '@Config'
+import encrypt from '@Server/helpers/hash'
+import { sign, decode } from '@Server/helpers/jsonwebtoken'
+import adminUsers from '@Server/repositories/adminUsers'
 
 export default {
   // NOTE: クロスドメインだとcookieの登録ができなかったので、このcheckTokenは使わなくした。
   // TODO: ↓要修正。ただクライアントのJSではcookieは触りたくない。
   checkToken(req, res) {
-    const token = req.cookies[config.token.key];
-    const decoded = decode(token);
+    const key = config.token.key
+    const token = req.cookies[key]
+    const decoded = decode(token)
 
-    if (!decoded) return res.status(401).send({ message: 'ログインしてください。' });
+    if (!decoded) return res.status(401).send({ message: 'ログインしてください。' })
 
-    const { username } = decoded;
+    const { username } = decoded
 
-    adminUsers.findOne(username).then(({ user }) => {
-      if (!user) throw new Error('ログインしてください。');
-      res.send({ token });
-    }).catch(({ message }) => res.status(400).send({ message }));
+    adminUsers
+      .findOne(username)
+      .then(({ user }) => {
+        if (!user) throw new Error('ログインしてください。')
+        res.send({ token })
+      })
+      .catch(({ message }) => res.status(400).send({ message }))
   },
 
   signin(req, res) {
-    const { username, password } = req.body;
+    const { username, password } = req.body
 
     // console.log(username, password);
     // const postUser = {
@@ -30,22 +34,27 @@ export default {
     // };
     // adminUsers.create(postUser);
 
-    adminUsers.findOne(username).then(({ user }) => {
-      const reqEncryptedPassword = encrypt(password);
+    adminUsers
+      .findOne(username)
+      .then(({ user }) => {
+        const reqEncryptedPassword = encrypt(password)
+        console.log(user)
+        console.log(reqEncryptedPassword)
 
-      if (!user || user.password !== reqEncryptedPassword) {
-        throw new Error('違います！！');
-      }
+        if (!user || user.password !== reqEncryptedPassword) {
+          throw new Error('違います！！')
+        }
 
-      const token = sign(username);
+        const token = sign(username)
 
-      if (!token) throw new Error('トークンが発行できません。');
+        if (!token) throw new Error('トークンが発行できません。')
 
-      res
-        // NOTE: クロスドメインだとcookieの登録ができなかったので、set-cookieは一旦しない。
-        // TODO: cookie使えるようにしたい。ただクライアントのJSではcookieは触りたくない。
-        // .cookie(config.token.key, token, { maxAge: 2 * 24 * 60 * 60 * 1000 })
-        .send({ token });
-    }).catch(({ message }) => res.status(400).send({ message }));
+        res
+          // NOTE: クロスドメインだとcookieの登録ができなかったので、set-cookieは一旦しない。
+          // TODO: cookie使えるようにしたい。ただクライアントのJSではcookieは触りたくない。
+          // .cookie(config.token.key, token, { maxAge: 2 * 24 * 60 * 60 * 1000 })
+          .send({ token })
+      })
+      .catch(({ message }) => res.status(400).send({ message }))
   },
-};
+}
