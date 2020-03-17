@@ -32,8 +32,10 @@
     "mysql2": "^2.0.0",
     "pm2": "^4.0.0",
     "prettier": "^1.19.1",
+    "reflect-metadata": "^0.1.13",
     "sequelize": "^5.19.0",
-    "sequelize-cli": "^5.5.0"
+    "sequelize-cli": "^5.5.0",
+    "typeorm": "^0.2.24"
   },
   "devDependencies": {
     "@babel/core": "7.8.4",

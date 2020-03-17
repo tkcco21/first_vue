@@ -6,4 +6,4 @@ module.exports = {
     }),
 
   down: queryInterface => queryInterface.removeColumn('books', 'imageUrl'),
-};
+}

@@ -14,8 +14,10 @@ services:
       - ./app:/root/app
     environment:
       DB_HOST: db
-      DB_USER: root
-      DB_PASS: devdev.21FirstTkc@
+      DB_DATABASE: dev_first_vue
+      DB_USERNAME: root
+      DB_PASSWORD: devdev.21FirstTkc@
+      DB_DIALECT: mysql
       DB_PORT: 3306
 
   db:

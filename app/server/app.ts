@@ -3,7 +3,12 @@ import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import helmet from 'helmet'
 
-import apiRouter from './routes/api'
+import { connection } from './database'
+// import apiRouter from './routes/api'
+
+connection.then(() => {
+  console.log(`\n --- Connected to database!! --- \n`)
+})
 
 const app = express()
 
@@ -34,7 +39,7 @@ app.use((req, res, next) => {
   next()
 })
 
-app.use('/api', apiRouter)
+// app.use('/api', apiRouter)
 
 // NOTE: /api以外のパスにきたらリダイレクト
 app.get('/', (req, res) => {

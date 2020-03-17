@@ -10,5 +10,5 @@
     "NODE_ENV": "development"
   },
   "ext": "ts,js,json",
-  "exec": "ts-node -r tsconfig-paths/register ./server/index.ts"
+  "exec": "ts-node --files -r tsconfig-paths/register ./server/index.ts"
 }
