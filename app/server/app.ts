@@ -1,19 +1,18 @@
-import express from 'express'
+import express, { response } from 'express'
 import compression from 'compression'
 import cookieParser from 'cookie-parser'
 import helmet from 'helmet'
 
 import { connection } from './database'
-// import apiRouter from './routes/api'
+import apiRouter from './routes/api'
+
+const app = express()
+const nodeEnv = process.env.NODE_ENV
+const isDev = nodeEnv === 'development'
 
 connection.then(() => {
   console.log(`\n --- Connected to database!! --- \n`)
 })
-
-const app = express()
-
-const nodeEnv = process.env.NODE_ENV
-const isDev = nodeEnv === 'development'
 
 let origin = ''
 if (isDev) {
@@ -26,7 +25,6 @@ app.set('port', process.env.PORT || 3000)
 app.use(compression())
 app.use(helmet())
 app.use(cookieParser())
-app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 // CORSを許可する
 app.use((req, res, next) => {
@@ -39,7 +37,11 @@ app.use((req, res, next) => {
   next()
 })
 
-// app.use('/api', apiRouter)
+app.get('/test', (req, res) => {
+  res.send({ type: 'test' })
+})
+
+app.use('/api', apiRouter)
 
 // NOTE: /api以外のパスにきたらリダイレクト
 app.get('/', (req, res) => {
