@@ -34,7 +34,7 @@
     "prettier": "^1.19.1",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^5.19.0",
-    "sequelize-cli": "^5.5.0",
+    "sequelize-cli": "^6.0.0",
     "typeorm": "^0.2.24"
   },
   "devDependencies": {
